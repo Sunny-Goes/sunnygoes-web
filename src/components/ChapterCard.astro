@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import { img } from '../lib/images';
+
+interface Chapter {
+  slug: string;
+  title: string;
+  description: string;
+  tags: string[];
+  status: 'active' | 'exploring' | 'queued';
+  image: string;
+}
+
+interface Props {
+  chapter: Chapter;
+}
+
+const { chapter } = Astro.props;
+---
+
+<a class="chapter-card reveal" href={`/notes?chapter=${chapter.slug}`}>
+  <span class={`chapter-card__status chapter-card__status--${chapter.status}`}>{chapter.status}</span>
+  <div class="chapter-card__media">
+    <Image
+      src={img(chapter.image)}
+      alt={`Sunny in the ${chapter.title} chapter`}
+      widths={[280, 560, 840]}
+      sizes="(max-width: 680px) 70vw, 280px"
+      format="webp"
+      quality={90}
+    />
+  </div>
+  <h3>{chapter.title}</h3>
+  <p class="chapter-card__desc">{chapter.description}</p>
+  <p class="chapter-card__tags">{chapter.tags.join(' · ')}</p>
+</a>

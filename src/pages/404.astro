@@ -1,0 +1,16 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import { img } from '../lib/images';
+---
+
+<Base title="404 — Sunny Goes" description="This page is still being explored.">
+  <section class="center-stage">
+    <div>
+      <Image src={img('expressions/sunny-confused.png')} alt="Sunny looking confused, with spiral eyes" widths={[210, 420, 630]} sizes="210px" format="webp" quality={90} />
+      <h1>This page is still being explored.</h1>
+      <span class="mono">404 — coordinates not found</span>
+      <a class="back-link" href="/">← back to base camp</a>
+    </div>
+  </section>
+</Base>

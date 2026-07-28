@@ -1,0 +1,27 @@
+---
+import { Image } from 'astro:assets';
+import { img } from '../lib/images';
+
+interface Props {
+  num: string;
+  title: string;
+  desc?: string;
+  sunny?: string; // asset key, e.g. 'poses/sunny-working-laptop.png'
+  sunnyAlt?: string;
+}
+
+const { num, title, desc, sunny, sunnyAlt = '' } = Astro.props;
+---
+
+<div class:list={['sec-head', { 'sec-head--with-sunny': sunny }, 'reveal']}>
+  <div>
+    <div class="sec-head__row">
+      <span class="sec-head__num">{num}</span>
+      <h2 class="sec-head__title">{title}</h2>
+    </div>
+    {desc && <p class="sec-head__desc">{desc}</p>}
+  </div>
+  {sunny && (
+    <Image class="sec-head__sunny" src={img(sunny)} alt={sunnyAlt} widths={[92, 184, 276]} sizes="92px" format="webp" quality={90} />
+  )}
+</div>

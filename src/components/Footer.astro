@@ -1,0 +1,23 @@
+---
+import { Image } from 'astro:assets';
+import { img } from '../lib/images';
+import site from '../data/site.json';
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__row">
+      <a class="site-footer__logo" href="/" aria-label="Sunny Goes — home">
+        <Image src={img('brand/sunny-wordmark.png')} alt="SUNNY" width={110} />
+        <span>{site.copyright}</span>
+      </a>
+      <nav class="site-footer__nav" aria-label="Footer">
+        <a href="/#chapters">Chapters</a>
+        <a href="/notes">Notes</a>
+        <a href="/#projects">Projects</a>
+        <a href={site.github} rel="me">GitHub</a>
+        <a href={site.rss}>RSS</a>
+      </nav>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import NoteRow from '../../components/NoteRow.astro';
+import { img } from '../../lib/images';
+import chapters from '../../data/chapters.json';
+
+const notes = (await getCollection('notes', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Base title="Notes — Sunny Goes" description="The Sunny Goes research feed: reverse-chronological notes on robotics, AI, quantum, space, and rogue experiments.">
+  <section class="section">
+    <div class="container">
+      <div class="sec-head reveal">
+        <div class="sec-head__row">
+          <span class="sec-head__num">02</span>
+          <h1 class="sec-head__title">Notes — all entries</h1>
+        </div>
+        <p class="sec-head__desc">
+          Every research note we've published, newest first. Filter by chapter.
+        </p>
+      </div>
+
+      <div class="filter-bar" data-filter-bar>
+        <button data-chapter="all" aria-pressed="true">All</button>
+        {chapters.map((c) => <button data-chapter={c.slug} aria-pressed="false">{c.slug}</button>)}
+      </div>
+
+      <div class="notes-list">
+        {notes.map((note) => <NoteRow note={note} />)}
+      </div>
+
+      <div class="empty-state" data-empty-state>
+        <Image src={img('expressions/sunny-sleepy.png')} alt="Sunny sleepy, recharging" widths={[150, 300, 450]} sizes="150px" format="webp" quality={90} />
+        <p>No notes here yet — Sunny is recharging.</p>
+      </div>
+    </div>
+  </section>
+</Base>

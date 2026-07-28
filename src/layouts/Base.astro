@@ -1,0 +1,127 @@
+---
+import '@fontsource-variable/space-grotesk';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import 'katex/dist/katex.min.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import site from '../data/site.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = `${site.name} — independent research studio`,
+  description = site.tagline,
+  ogImage = '/og-image.png',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogUrl = new URL(ogImage, Astro.site);
+---
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogUrl} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="alternate" type="application/rss+xml" title={`${site.name} — notes`} href={site.rss} />
+    <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      document.documentElement.classList.replace('no-js', 'js');
+    </script>
+  </head>
+  <body>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // --- mobile nav ---
+      const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+      const nav = document.querySelector<HTMLElement>('.site-nav');
+      toggle?.addEventListener('click', () => {
+        const open = nav!.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+      nav?.addEventListener('click', (e) => {
+        if ((e.target as HTMLElement).tagName === 'A') {
+          nav.classList.remove('open');
+          toggle?.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // --- scroll reveal (once, subtle) ---
+      const revealEls = document.querySelectorAll('.reveal');
+      if (!reduced && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('in');
+                io.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.12 }
+        );
+        revealEls.forEach((el) => io.observe(el));
+      } else {
+        revealEls.forEach((el) => el.classList.add('in'));
+      }
+
+      // --- notes chapter filter (index page) ---
+      const filterBar = document.querySelector<HTMLElement>('[data-filter-bar]');
+      if (filterBar) {
+        const buttons = Array.from(filterBar.querySelectorAll('button[data-chapter]'));
+        const rows = Array.from(document.querySelectorAll<HTMLElement>('[data-note-chapter]'));
+        const empty = document.querySelector<HTMLElement>('[data-empty-state]');
+
+        const apply = (chapter: string, updateUrl = true) => {
+          buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.chapter === chapter)));
+          let visible = 0;
+          rows.forEach((row) => {
+            const showRow = chapter === 'all' || row.dataset.noteChapter === chapter;
+            row.style.display = showRow ? '' : 'none';
+            if (showRow) visible++;
+          });
+          empty?.classList.toggle('visible', visible === 0);
+          if (updateUrl) {
+            const url = new URL(window.location.href);
+            chapter === 'all' ? url.searchParams.delete('chapter') : url.searchParams.set('chapter', chapter);
+            window.history.replaceState(null, '', url);
+          }
+        };
+
+        buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.chapter!)));
+        const initial = new URLSearchParams(window.location.search).get('chapter');
+        if (initial && buttons.some((b) => b.dataset.chapter === initial)) apply(initial, false);
+      }
+    </script>
+  </body>
+</html>

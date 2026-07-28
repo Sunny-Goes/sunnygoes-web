@@ -1,0 +1,172 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import SectionHead from '../components/SectionHead.astro';
+import ChapterCard from '../components/ChapterCard.astro';
+import NoteRow from '../components/NoteRow.astro';
+import ProjectRow from '../components/ProjectRow.astro';
+import { img } from '../lib/images';
+import site from '../data/site.json';
+import chapters from '../data/chapters.json';
+import projects from '../data/projects.json';
+
+const notes = (await getCollection('notes', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 7);
+---
+
+<Base description="Sunny Goes is an independent research studio working on multiagent AI, robotics, and security, in public.">
+  <!-- 1 · HERO -->
+  <section class="hero">
+    <div class="container hero__grid">
+      <div>
+        <h1>An independent <span class="u-accent">research &amp; engineering studio</span></h1>
+        <p class="hero__sub">{site.tagline}</p>
+      </div>
+      <figure class="hero__figure">
+        <div class="hero__float">
+          <Image
+            src={img('poses/sunny-waving.png')}
+            alt="Sunny, the studio's little robot explorer, waving hello"
+            widths={[420, 840, 1260]}
+            sizes="(max-width: 860px) 320px, 420px"
+            format="webp"
+            quality={90}
+            loading="eager"
+          />
+        </div>
+        <figcaption class="hero__caption">sunny, our little explorer</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 2 · MANIFESTO -->
+  <section class="manifesto section section--alt">
+    <div class="container manifesto__inner reveal">
+      <Image class="manifesto__sunny" src={img('poses/sunny-pointing.png')} alt="Sunny pointing at the manifesto" widths={[118, 236, 354]} sizes="(max-width: 680px) 84px, 118px" format="webp" quality={90} />
+      <p>
+        We believe in open source. Every experiment here is a note you can read, a repo
+        you can fork, and a failure we <em>document&nbsp;honestly</em>.
+      </p>
+    </div>
+  </section>
+
+  <!-- 3 · CHAPTERS -->
+  <section class="section" id="chapters">
+    <div class="container">
+      <SectionHead
+        num="01"
+        title="Chapters"
+        desc="Each research area is a chapter. Pick one."
+      />
+      <div class="chapters-grid">
+        {chapters.map((c) => <ChapterCard chapter={c} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · NOTES -->
+  <section class="section section--alt" id="notes">
+    <div class="container">
+      <SectionHead
+        num="02"
+        title="Notes"
+        desc="The research feed: what we tried, what broke, what we learned."
+        sunny="poses/sunny-working-laptop.png"
+        sunnyAlt="Sunny typing on a laptop"
+      />
+      <div class="notes-list reveal">
+        {notes.map((note) => <NoteRow note={note} />)}
+      </div>
+      <div class="notes-more">
+        <a href="/notes">View all notes →</a>
+        <Image src={img('expressions/sunny-curious.png')} alt="Sunny looking curious" widths={[52, 104, 156]} sizes="52px" format="webp" quality={90} />
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · PROJECTS -->
+  <section class="section" id="projects">
+    <div class="container">
+      <SectionHead
+        num="03"
+        title="Projects & experiments"
+        desc="Open-source by default. Tools, toys, and prototypes that came out of the notes."
+        sunny="poses/sunny-building.png"
+        sunnyAlt="Sunny repairing a gadget with a wrench"
+      />
+      <div class="projects-list">
+        {projects.map((p) => <ProjectRow project={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · STUDIO -->
+  <section class="section section--alt" id="studio">
+    <div class="container">
+      <SectionHead num="04" title="Studio" />
+      <div class="studio__grid">
+        <div class="studio__copy reveal">
+          <p>
+            <strong>Sunny Goes</strong> is an independent research and engineering studio
+            run by two researchers with interdisciplinary backgrounds spanning physics,
+            theoretical chemistry, quantum computing, zero-knowledge cryptography, and
+            cryptoeconomics.
+          </p>
+          <p>
+            We build technical projects, prototypes, and experiments in public — sharing
+            the process through research notes, software, demos, interviews, and
+            open-source work. Sunny, the little robot, is how the lab notebook talks back.
+          </p>
+          <div class="studio__founders">
+            <div class="founder">
+              <Image class="founder__avatar" src={img('founders/carlo-modica.png')} alt="Carlo Modica" widths={[128, 256]} sizes="64px" format="webp" quality={90} />
+              <div>
+                <p class="founder__name">Carlo Modica</p>
+                <p class="founder__bio">Physicist by training who has made a habit of switching fields: experimental quantum devices, quantum machine learning, classical ML, and cryptography. The common thread is taking hard math and making it run on real systems — these days mostly in Rust and Python.</p>
+                <p class="founder__bio">The physics came first: BEng in Engineering Physics at Politecnico di Milano, MSc in Physics in Copenhagen, with an experimental thesis on vacuum-gap capacitors for semiconductor qubits at the Microsoft Labs, Center for Quantum Devices. At Cambridge Quantum Computing, a move into quantum machine learning: co-authored the F-VQE paper, wrote the simulation code, and ran the experiments on Honeywell's H1 trapped-ion hardware. Classical ML picked up along the way, with a bronze medal in a Kaggle medical-imaging competition.</p>
+                <p class="founder__bio">Since 2022, active in zero-knowledge cryptography across the stack: design and implementation of polynomial commitment schemes, the latest being WHIR in collaboration with the Ethereum Foundation; core pieces of Valida, a STARK-based zkVM, from continuations and a parallel prover to its soundness analysis; a protocol for private transactions across blockchains co-designed with Zcash; and VampIR, a circuit compiler. Underneath all this: performance engineering mixed with protocol design.</p>
+                <p class="founder__bio">The newest thread is AI agents: currently building an AI agent for autonomous auditing of smart contracts.</p>
+                <p class="founder__links">
+                  <a href="https://github.com/camofu" target="_blank" rel="noopener me">GitHub ↗</a>
+                  <a href="https://www.linkedin.com/in/carlo-modica/" target="_blank" rel="noopener me">LinkedIn ↗</a>
+                </p>
+              </div>
+            </div>
+            <div class="founder">
+              <Image class="founder__avatar" src={img('founders/luca-nicoli.png')} alt="Luca Nicoli" widths={[128, 256]} sizes="64px" format="webp" quality={90} />
+              <div>
+                <p class="founder__name">Luca Nicoli</p>
+                <p class="founder__bio">Research scientist trained in Engineering Physics, with a focus on semiconductor nanotechnologies. After a PhD cum laude from Scuola Normale Superiore in Theoretical &amp; Computational Chemistry, a shift to crypto: MEV solver agents, optimal routing, and cryptoeconomic mechanism design. Also co-founder and administrator of Traent Hub, Pisa's technology and innovation hub.</p>
+                <p class="founder__links">
+                  <a href="https://github.com/luca-nik" target="_blank" rel="noopener me">GitHub ↗</a>
+                  <a href="https://www.linkedin.com/in/luca-nicoli/" target="_blank" rel="noopener me">LinkedIn ↗</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <Image class="studio__figure reveal" src={img('poses/sunny-exploring.png')} alt="Sunny with a backpack and a map, exploring" widths={[300, 600, 900]} sizes="(max-width: 860px) 240px, 300px" format="webp" quality={90} />
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · CONTACT -->
+  <section class="section" id="contact">
+    <div class="container">
+      <SectionHead num="05" title="Contact / follow" desc="Say hello, point at a bug, propose a collaboration." />
+      <div class="contact__grid reveal">
+        <div>
+          <a class="contact__email" href={`mailto:${site.email}`}>{site.email}</a>
+          <div class="contact__links">
+            <a href={site.github} target="_blank" rel="noopener me">GitHub ↗</a>
+            <a href={site.x} target="_blank" rel="noopener me">X / Twitter ↗</a>
+            <a href={site.rss}>RSS</a>
+          </div>
+        </div>
+        <Image class="contact__sunny" src={img('poses/sunny-celebrating.png')} alt="Sunny celebrating with confetti" widths={[150, 300, 450]} sizes="150px" format="webp" quality={90} />
+      </div>
+    </div>
+  </section>
+</Base>

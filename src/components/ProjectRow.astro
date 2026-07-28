@@ -1,0 +1,34 @@
+---
+interface Project {
+  name: string;
+  years: string;
+  tags: string[];
+  description: string;
+  links: { github: string | null; demo: string | null };
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<div class="project-row reveal">
+  <div>
+    <h3 class="project-row__name">{project.name}</h3>
+    <p class="project-row__years">{project.years}</p>
+  </div>
+  <div>
+    <p class="project-row__desc">{project.description}</p>
+    <p class="project-row__tags">{project.tags.join(' · ')}</p>
+  </div>
+  <div class="project-row__links">
+    {project.links.github && (
+      <a href={project.links.github} target="_blank" rel="noopener">github ↗</a>
+    )}
+    {project.links.demo && (
+      <a href={project.links.demo} target="_blank" rel="noopener">demo ↗</a>
+    )}
+  </div>
+</div>

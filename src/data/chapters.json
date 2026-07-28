@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "ai",
+    "title": "Sunny Goes AI",
+    "description": "Learning systems, from scratch and in the open.",
+    "tags": ["llms", "agents", "evals"],
+    "status": "active",
+    "image": "themes/sunny-goes-ai.png"
+  },
+  {
+    "slug": "rogue",
+    "title": "Sunny Goes Rogue",
+    "description": "Unscheduled experiments. No roadmap, no mercy.",
+    "tags": ["security", "breaking things"],
+    "status": "active",
+    "image": "themes/sunny-goes-rogue.png"
+  },
+  {
+    "slug": "robotics",
+    "title": "Sunny Goes Robotics",
+    "description": "Machines that move, sense, and build.",
+    "tags": ["embedded", "control", "sim2real"],
+    "status": "queued",
+    "image": "themes/sunny-goes-robotics.png"
+  }
+]

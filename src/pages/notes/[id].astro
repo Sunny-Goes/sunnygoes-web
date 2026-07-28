@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { img } from '../../lib/images';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes', ({ data }) => !data.draft && !data.url);
+  return notes.map((note) => ({ params: { id: note.id }, props: { note } }));
+}
+
+const { note } = Astro.props;
+const { Content } = await render(note);
+const { title, date, abstract, tags, chapter, cover, paper } = note.data;
+const iso = date.toISOString().slice(0, 10);
+---
+
+<Base title={`${title} — Sunny Goes`} description={abstract}>
+  <section class="section">
+    <div class="container note-page">
+      <a class="back-link--top" href="/notes">← all notes</a>
+      <div class="note-page__meta mono">
+        <time datetime={iso}>{iso}</time>
+        {chapter && <span>·</span>}
+        {chapter && <span>sunny goes {chapter}</span>}
+        {tags.map((t) => <span class="note-row__tag">{t}</span>)}
+      </div>
+      <h1>{title}</h1>
+      <p class="note-page__abstract">{abstract}</p>
+      {cover && (
+        <figure class="note-page__cover">
+          <a href={paper} target="_blank" rel="noopener">
+            <Image
+              src={img(cover)}
+              alt={`First page of the paper discussed in this note`}
+              widths={[480, 960, 1240]}
+              sizes="(max-width: 680px) 92vw, 480px"
+              format="webp"
+              quality={85}
+            />
+          </a>
+          <figcaption class="mono">first page of the paper · click to open</figcaption>
+        </figure>
+      )}
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+  </section>
+</Base>

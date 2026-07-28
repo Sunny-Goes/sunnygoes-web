@@ -1,0 +1,25 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  note: CollectionEntry<'notes'>;
+}
+
+const { note } = Astro.props;
+const { title, date, abstract, tags, url } = note.data;
+const href = url ?? `/notes/${note.id}/`;
+const external = Boolean(url);
+const iso = date.toISOString().slice(0, 10);
+---
+
+<div class="note-row" data-note-chapter={note.data.chapter ?? ''}>
+  <time class="note-row__date" datetime={iso}>{iso}</time>
+  <div>
+    <a href={href} {...external ? { target: '_blank', rel: 'noopener' } : {}}>
+      <h3 class="note-row__title">{title}</h3>
+      {external && <span class="note-row__ext" aria-label="external link">↗</span>}
+    </a>
+    <p class="note-row__abstract">{abstract}</p>
+  </div>
+  {tags.length > 0 && <span class="note-row__tag">{tags[0]}</span>}
+</div>

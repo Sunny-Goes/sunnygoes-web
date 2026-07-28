@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import { img } from '../lib/images';
+
+const current = Astro.url.pathname;
+const links = [
+  { href: '/#chapters', label: 'Chapters' },
+  { href: '/notes', label: 'Notes' },
+  { href: '/#projects', label: 'Projects' },
+  { href: '/#studio', label: 'Studio' },
+];
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="site-header__logo" href="/" aria-label="Sunny Goes — home">
+      <Image src={img('brand/sunny-wordmark.png')} alt="SUNNY" width={150} loading="eager" />
+      <span class="mono">goes</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      {links.map((l) => (
+        <a href={l.href} aria-current={l.href === '/notes' && current.startsWith('/notes') ? 'page' : undefined}>
+          {l.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
