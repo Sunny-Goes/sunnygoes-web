@@ -1,8 +1,7 @@
 # Placeholders — everything you need to swap
 
-Per Part 3 of the handoff brief: this is every spot that contains placeholder content.
-Search-friendly: most template content is also marked with the string `TEMPLATE` or
-`placeholder: true`.
+This is every spot that contains placeholder content. Search-friendly: remaining
+template content is marked with the string `TEMPLATE` or `placeholder: true`.
 
 ## 1. Domain & hosting
 
@@ -11,46 +10,44 @@ Search-friendly: most template content is also marked with the string `TEMPLATE`
 
 ## 2. Site-wide data — `src/data/site.json`
 
-- `email` — contact email (used in section 05 + mailto)
+- `email` — contact email (used in section 04 + the `/defense` CTA)
 - `github` — GitHub org URL (nav, footer, contact)
 - `x` — X/Twitter profile URL (contact)
 - `rss` — feed path (only change if you move it)
-- `subline` — hero sub-line under the big statement
-- `copyright`, `footerNote` — legal/footer lines (footerNote is from the brief)
+- `copyright` — legal/footer line
 
-## 3. Founders — `src/pages/index.astro`, section 04 Studio
+## 3. Product story — `src/data/defense.json`
 
-- Two `div.founder` blocks: names and one-paragraph bios are placeholders.
-- If you want photos/avatars: drop them in `src/assets/` and add an `<Image>` next to
-  each `.founder__name`. (Or keep it text-only — the layout works as is.)
+All Defense copy lives here: name, tagline, pitch, the six pipeline stage blurbs
+(shown on hover/focus in the diagram), and the five deck slides on `/defense`.
+Written to be shown to investors; edit freely. Two rules: the product's internal
+codename never appears on the site, and no internal architecture terms belong in
+this file.
 
-## 4. Notes — `src/content/notes/`
+## 4. Founders — `src/pages/index.astro`, section 03 Studio
+
+Real founders and bios (Carlo Modica, Luca Nicoli) with avatars from
+`src/assets/founders/`. Update bios in place as roles evolve.
+
+## 5. Notes — `src/content/notes/`
 
 The placeholder templates were replaced on 2026-07-27 with 25 real notes: the
 "Agentic Automated Discovery & Optimization" paper syntheses from
-`agentic_discovery_review/` (all tagged `chapter: ai`). Add new notes the same
+`agentic_discovery_review/`. The `chapter` frontmatter field is still validated by
+`src/content.config.ts` but no longer rendered anywhere. Add new notes the usual
 way — one Markdown file per note, frontmatter validated in `src/content.config.ts`.
 
-## 5. Projects — `src/data/projects.json`
+## 6. Hero & manifesto copy — `src/pages/index.astro`
 
-Three `TEMPLATE` entries (`project-name-one/two/three`). Replace with real projects:
-name, year range, tech tags, 2-line description, GitHub/demo links (`null` hides a link).
+- The hero statement (`<h1>`) names the product — adjust wording freely; keep
+  `<span class="u-accent">` around the highlighted phrase.
+- The manifesto paragraph (section 2) is brief-flavored copy.
 
-## 6. Chapters — `src/data/chapters.json`
-
-Copy is from the brief (safe to ship) but editable: descriptions, tag lists, and the
-`status` pill per chapter (`active` / `exploring` / `queued`).
-
-## 7. Hero & manifesto copy — `src/pages/index.astro`
-
-- The hero statement (`<h1>`) is from the brief — adjust wording freely; keep
-  `<span class="u-accent">` around the one highlighted phrase.
-- The manifesto paragraph (section 2) is brief-flavored placeholder copy.
-
-## 8. Social image — `public/og-image.png`
+## 7. Social image — `public/og-image.png`
 
 Generated from the asset pack (sticker + wordmark + Menlo type on cream, 1200×630).
 Regenerate or replace if the brand changes; referenced in `src/layouts/Base.astro`.
+Note: the current OG image predates the Defense restructure.
 
 ## Watermark status (resolved on the shipped assets)
 

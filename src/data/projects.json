@@ -1,9 +1,0 @@
-[
-  {
-    "name": "project-name",
-    "years": "2026 —",
-    "tags": ["language", "domain"],
-    "description": "TEMPLATE — two-line description of the project: what it does, why it exists. Replace with a real project.",
-    "links": { "github": "https://github.com/sunnygoes/project-name", "demo": null }
-  }
-]

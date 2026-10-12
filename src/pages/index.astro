@@ -3,26 +3,28 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import SectionHead from '../components/SectionHead.astro';
-import ChapterCard from '../components/ChapterCard.astro';
+import Pipeline from '../components/Pipeline.astro';
 import NoteRow from '../components/NoteRow.astro';
-import ProjectRow from '../components/ProjectRow.astro';
 import { img } from '../lib/images';
 import site from '../data/site.json';
-import chapters from '../data/chapters.json';
-import projects from '../data/projects.json';
+import defense from '../data/defense.json';
 
 const notes = (await getCollection('notes', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 7);
 ---
 
-<Base description="Sunny Goes is an independent research studio working on multiagent AI, robotics, and security, in public.">
+<Base description="Sunny Goes builds Defense, an autonomous whitehat system for vulnerability discovery, and publishes research notes on AI and security.">
   <!-- 1 · HERO -->
   <section class="hero">
     <div class="container hero__grid">
       <div>
-        <h1>An independent <span class="u-accent">research &amp; engineering studio</span></h1>
+        <h1><span class="u-accent">Defense</span>: autonomous vulnerability discovery, proven.</h1>
         <p class="hero__sub">{site.tagline}</p>
+        <p class="hero__cta">
+          <a class="hero__cta-link hero__cta-link--primary" href="/defense">How it works →</a>
+          <a class="hero__cta-link" href="/notes">Latest notes →</a>
+        </p>
       </div>
       <figure class="hero__figure">
         <div class="hero__float">
@@ -46,22 +48,26 @@ const notes = (await getCollection('notes', ({ data }) => !data.draft))
     <div class="container manifesto__inner reveal">
       <Image class="manifesto__sunny" src={img('poses/sunny-pointing.png')} alt="Sunny pointing at the manifesto" widths={[118, 236, 354]} sizes="(max-width: 680px) 84px, 118px" format="webp" quality={90} />
       <p>
-        We believe in open source. Every experiment here is a note you can read, a repo
-        you can fork, and a failure we <em>document&nbsp;honestly</em>.
+        We believe in open research. Every experiment here is a note you can read, and a
+        failure we <em>document&nbsp;honestly</em>. The product is built quietly; what we
+        learn from it is not.
       </p>
     </div>
   </section>
 
-  <!-- 3 · CHAPTERS -->
-  <section class="section" id="chapters">
+  <!-- 3 · DEFENSE -->
+  <section class="section" id="defense">
     <div class="container">
       <SectionHead
         num="01"
-        title="Chapters"
-        desc="Each research area is a chapter. Pick one."
+        title="Defense"
+        desc={defense.tagline}
+        sunny="poses/sunny-building.png"
+        sunnyAlt="Sunny repairing a gadget with a wrench"
       />
-      <div class="chapters-grid">
-        {chapters.map((c) => <ChapterCard chapter={c} />)}
+      <Pipeline />
+      <div class="defense-more">
+        <a href="/defense">The full story →</a>
       </div>
     </div>
   </section>
@@ -86,26 +92,10 @@ const notes = (await getCollection('notes', ({ data }) => !data.draft))
     </div>
   </section>
 
-  <!-- 5 · PROJECTS -->
-  <section class="section" id="projects">
+  <!-- 5 · STUDIO -->
+  <section class="section" id="studio">
     <div class="container">
-      <SectionHead
-        num="03"
-        title="Projects & experiments"
-        desc="Open-source by default. Tools, toys, and prototypes that came out of the notes."
-        sunny="poses/sunny-building.png"
-        sunnyAlt="Sunny repairing a gadget with a wrench"
-      />
-      <div class="projects-list">
-        {projects.map((p) => <ProjectRow project={p} />)}
-      </div>
-    </div>
-  </section>
-
-  <!-- 6 · STUDIO -->
-  <section class="section section--alt" id="studio">
-    <div class="container">
-      <SectionHead num="04" title="Studio" />
+      <SectionHead num="03" title="Studio" />
       <div class="studio__grid">
         <div class="studio__copy reveal">
           <p>
@@ -115,19 +105,19 @@ const notes = (await getCollection('notes', ({ data }) => !data.draft))
             cryptoeconomics.
           </p>
           <p>
-            We build technical projects, prototypes, and experiments in public — sharing
-            the process through research notes, software, demos, interviews, and
-            open-source work. Sunny, the little robot, is how the lab notebook talks back.
+            We research in public through our notes, and we build Defense, our autonomous
+            whitehat system for vulnerability discovery. Sunny, the little robot, is how
+            the lab notebook talks back.
           </p>
           <div class="studio__founders">
             <div class="founder">
               <Image class="founder__avatar" src={img('founders/carlo-modica.png')} alt="Carlo Modica" widths={[128, 256]} sizes="64px" format="webp" quality={90} />
               <div>
                 <p class="founder__name">Carlo Modica</p>
-                <p class="founder__bio">Physicist by training who has made a habit of switching fields: experimental quantum devices, quantum machine learning, classical ML, and cryptography. The common thread is taking hard math and making it run on real systems — these days mostly in Rust and Python.</p>
+                <p class="founder__bio">Physicist by training who has made a habit of switching fields: experimental quantum devices, quantum machine learning, classical ML, and cryptography. The common thread is taking hard math and making it run on real systems, these days mostly in Rust and Python.</p>
                 <p class="founder__bio">The physics came first: BEng in Engineering Physics at Politecnico di Milano, MSc in Physics in Copenhagen, with an experimental thesis on vacuum-gap capacitors for semiconductor qubits at the Microsoft Labs, Center for Quantum Devices. At Cambridge Quantum Computing, a move into quantum machine learning: co-authored the F-VQE paper, wrote the simulation code, and ran the experiments on Honeywell's H1 trapped-ion hardware. Classical ML picked up along the way, with a bronze medal in a Kaggle medical-imaging competition.</p>
                 <p class="founder__bio">Since 2022, active in zero-knowledge cryptography across the stack: design and implementation of polynomial commitment schemes, the latest being WHIR in collaboration with the Ethereum Foundation; core pieces of Valida, a STARK-based zkVM, from continuations and a parallel prover to its soundness analysis; a protocol for private transactions across blockchains co-designed with Zcash; and VampIR, a circuit compiler. Underneath all this: performance engineering mixed with protocol design.</p>
-                <p class="founder__bio">The newest thread is AI agents: currently building an AI agent for autonomous auditing of smart contracts.</p>
+                <p class="founder__bio">The newest thread is AI agents: currently building Defense, an autonomous whitehat system for smart-contract vulnerability discovery.</p>
                 <p class="founder__links">
                   <a href="https://github.com/camofu" target="_blank" rel="noopener me">GitHub ↗</a>
                   <a href="https://www.linkedin.com/in/carlo-modica/" target="_blank" rel="noopener me">LinkedIn ↗</a>
@@ -152,10 +142,10 @@ const notes = (await getCollection('notes', ({ data }) => !data.draft))
     </div>
   </section>
 
-  <!-- 7 · CONTACT -->
+  <!-- 6 · CONTACT -->
   <section class="section" id="contact">
     <div class="container">
-      <SectionHead num="05" title="Contact / follow" desc="Say hello, point at a bug, propose a collaboration." />
+      <SectionHead num="04" title="Contact / follow" desc="Say hello, point at a bug, propose a collaboration." />
       <div class="contact__grid reveal">
         <div>
           <a class="contact__email" href={`mailto:${site.email}`}>{site.email}</a>
