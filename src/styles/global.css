@@ -245,9 +245,9 @@ ul, ol { padding: 0; list-style: none; }
   .manifesto__sunny { width: 84px; }
 }
 
-/* ---------- defense (home section + /defense page) ---------- */
-.defense-more { margin-top: 28px; }
-.defense-more a {
+/* ---------- vanguard (home section + /vanguard page) ---------- */
+.vanguard-more { margin-top: 28px; }
+.vanguard-more a {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   letter-spacing: 0.1em;
@@ -255,34 +255,34 @@ ul, ol { padding: 0; list-style: none; }
   border-bottom: 2px solid var(--accent);
   padding-bottom: 2px;
 }
-.defense-hero { padding-block: 72px 64px; }
-.defense-hero__kicker { color: var(--ink-50); margin-bottom: 18px; }
-.defense-hero h1 {
+.vanguard-hero { padding-block: 72px 64px; }
+.vanguard-hero__kicker { color: var(--ink-50); margin-bottom: 18px; }
+.vanguard-hero h1 {
   font-size: clamp(3rem, 7vw, 5rem);
   font-weight: 500;
   letter-spacing: -0.03em;
   line-height: 1;
 }
-.defense-hero__tagline {
+.vanguard-hero__tagline {
   margin-top: 20px;
   font-size: clamp(1.2rem, 2.4vw, 1.6rem);
   font-weight: 500;
   max-width: 34ch;
 }
-.defense-hero__pitch { margin-top: 18px; color: var(--ink-70); max-width: 60ch; }
-.defense-cta h2 { font-size: clamp(1.7rem, 3.6vw, 2.4rem); font-weight: 500; letter-spacing: -0.02em; }
-.defense-cta__sub { margin-top: 12px; color: var(--ink-70); }
-.defense-cta .contact__email { display: inline-block; margin-top: 28px; }
-.defense-cta__notes { margin-top: 26px; }
-.defense-cta__notes a {
+.vanguard-hero__pitch { margin-top: 18px; color: var(--ink-70); max-width: 60ch; }
+.vanguard-cta h2 { font-size: clamp(1.7rem, 3.6vw, 2.4rem); font-weight: 500; letter-spacing: -0.02em; }
+.vanguard-cta__sub { margin-top: 12px; color: var(--ink-70); }
+.vanguard-cta .contact__email { display: inline-block; margin-top: 28px; }
+.vanguard-cta__notes { margin-top: 26px; }
+.vanguard-cta__notes a {
   color: var(--ink-50);
   border-bottom: 2px solid var(--line);
   padding-bottom: 2px;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
-.defense-cta__notes a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+.vanguard-cta__notes a:hover { color: var(--ink); border-bottom-color: var(--accent); }
 
-/* ---------- defense pipeline (interactive diagram) ---------- */
+/* ---------- vanguard pipeline (interactive diagram) ---------- */
 .pipe__scroll { overflow-x: auto; }
 .pipe__scroll svg { display: block; width: 100%; min-width: 640px; height: auto; }
 .pipe__frame { fill: none; stroke: var(--line); stroke-width: 1; }
@@ -366,7 +366,7 @@ ul, ol { padding: 0; list-style: none; }
   padding-left: 14px;
 }
 
-/* ---------- defense deck (swiping slides) ---------- */
+/* ---------- vanguard deck (swiping slides) ---------- */
 .deck__track {
   position: relative;
   display: flex;

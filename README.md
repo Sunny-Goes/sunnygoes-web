@@ -1,7 +1,7 @@
 # Sunny Goes — website
 
 The website for **Sunny Goes**, an independent research and engineering studio.
-Home of **Defense**, an autonomous whitehat system for vulnerability discovery,
+Home of **Vanguard**, an autonomous whitehat system for vulnerability discovery,
 and of Sunny, the little robot explorer. Research notes are published in public;
 the product is built quietly.
 
@@ -14,7 +14,7 @@ background, near-black text, one yellow accent, numbered sections, monospaced de
   script for the menu / scroll-reveal / pipeline / deck)
 - Content Collections for notes (Markdown with frontmatter)
 - LaTeX math in notes via `remark-math` + `rehype-katex` (`$…$` inline, fenced `$$` blocks); KaTeX CSS/fonts are bundled
-- JSON data files for site config and the Defense product story
+- JSON data files for site config and the Vanguard product story
 - `astro:assets` image optimization (all mascot PNGs are served as responsive WebP)
 - Fonts: Space Grotesk Variable + IBM Plex Mono (self-hosted via Fontsource)
 - No Tailwind, no UI framework — one hand-written stylesheet (`src/styles/global.css`)
@@ -44,7 +44,7 @@ and the RSS feed derive from it.
 src/
 ├── data/
 │   ├── site.json          # name, domain, email, social links, footer lines
-│   └── defense.json       # the product: tagline, pipeline stage blurbs, deck slides
+│   └── vanguard.json      # the product: tagline, pipeline stage blurbs, deck slides
 ├── content/
 │   └── notes/             # research notes — one Markdown file per note
 ├── assets/                # mascot PNGs (optimized at build time)
@@ -52,8 +52,8 @@ src/
 ├── components/            # Header, Footer, SectionHead, Pipeline, NoteRow
 ├── layouts/Base.astro     # <head>, fonts, meta/OG, header/footer, the one <script>
 ├── pages/
-│   ├── index.astro        # the single-page site (hero, Defense, notes, studio, contact)
-│   ├── defense.astro      # the product page: interactive pipeline + story deck
+│   ├── index.astro        # the single-page site (hero, Vanguard, notes, studio, contact)
+│   ├── vanguard.astro     # the product page: interactive pipeline + story deck
 │   ├── notes/index.astro  # full notes index
 │   ├── notes/[id].astro   # one page per note (skipped for notes with external `url`)
 │   ├── 404.astro          # "This page is still being explored."
@@ -70,9 +70,9 @@ optional `chapter`, optional external `url`, `draft: true` to hide). Write the b
 Markdown; it becomes the note's page. Notes with `url` set link out instead of rendering
 a local page. Nothing else to touch — home, `/notes`, and `/rss.xml` update automatically.
 
-**Edit the product story** — `src/data/defense.json` (name, tagline, pitch, the six
+**Edit the product story** — `src/data/vanguard.json` (name, tagline, pitch, the six
 pipeline stage blurbs shown on hover in the diagram, and the five deck slides on
-`/defense`). The home page, `/defense`, and the pipeline panel all read from it.
+`/vanguard`). The home page, `/vanguard`, and the pipeline panel all read from it.
 
 **Edit global links & lines** — `src/data/site.json`.
 

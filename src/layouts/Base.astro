@@ -95,7 +95,7 @@ const ogUrl = new URL(ogImage, Astro.site);
         revealEls.forEach((el) => el.classList.add('in'));
       }
 
-      // --- defense pipeline: hover/focus a stage to read what it does ---
+      // --- vanguard pipeline: hover/focus a stage to read what it does ---
       const pipeline = document.querySelector<HTMLElement>('[data-pipeline]');
       if (pipeline) {
         const panel = pipeline.querySelector<HTMLElement>('[data-pipeline-panel]');
@@ -124,7 +124,7 @@ const ogUrl = new URL(ogImage, Astro.site);
         });
       }
 
-      // --- defense deck: prev/next buttons, dots, counter ---
+      // --- vanguard deck: prev/next buttons, dots, counter ---
       const deck = document.querySelector<HTMLElement>('[data-deck]');
       if (deck) {
         const track = deck.querySelector<HTMLElement>('.deck__track')!;

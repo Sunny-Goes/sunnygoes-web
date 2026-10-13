@@ -2,18 +2,18 @@
 import Base from '../layouts/Base.astro';
 import SectionHead from '../components/SectionHead.astro';
 import Pipeline from '../components/Pipeline.astro';
-import defense from '../data/defense.json';
+import vanguard from '../data/vanguard.json';
 import site from '../data/site.json';
 ---
 
-<Base title={`${defense.name} · Sunny Goes`} description={defense.tagline}>
+<Base title={`${vanguard.name} · Sunny Goes`} description={vanguard.tagline}>
   <!-- page head -->
-  <section class="defense-hero">
+  <section class="vanguard-hero">
     <div class="container">
-      <p class="defense-hero__kicker mono">the product</p>
-      <h1>{defense.name}</h1>
-      <p class="defense-hero__tagline">{defense.tagline}</p>
-      <p class="defense-hero__pitch">{defense.pitch}</p>
+      <p class="vanguard-hero__kicker mono">the product</p>
+      <h1>{vanguard.name}</h1>
+      <p class="vanguard-hero__tagline">{vanguard.tagline}</p>
+      <p class="vanguard-hero__pitch">{vanguard.pitch}</p>
     </div>
   </section>
 
@@ -38,8 +38,8 @@ import site from '../data/site.json';
         desc="Five slides. Swipe, or use the arrows."
       />
       <div class="deck" data-deck>
-        <div class="deck__track" tabindex="0" role="region" aria-label="Defense story slides">
-          {defense.slides.map((s) => (
+        <div class="deck__track" tabindex="0" role="region" aria-label="Vanguard story slides">
+          {vanguard.slides.map((s) => (
             <article class="deck__slide">
               <span class="deck__num mono">{s.num}</span>
               <h3>{s.title}</h3>
@@ -50,11 +50,11 @@ import site from '../data/site.json';
         <div class="deck__nav">
           <button class="deck__btn mono" data-deck-prev aria-label="Previous slide">←</button>
           <div class="deck__dots">
-            {defense.slides.map((_, i) => (
+            {vanguard.slides.map((_, i) => (
               <button class="deck__dot" data-deck-dot={i} aria-label={`Go to slide ${i + 1}`} />
             ))}
           </div>
-          <span class="deck__count mono" data-deck-count>1 / {defense.slides.length}</span>
+          <span class="deck__count mono" data-deck-count>1 / {vanguard.slides.length}</span>
           <button class="deck__btn mono" data-deck-next aria-label="Next slide">→</button>
         </div>
       </div>
@@ -63,11 +63,11 @@ import site from '../data/site.json';
 
   <!-- cta -->
   <section class="section section--alt">
-    <div class="container defense-cta">
-      <h2>Interested in Defense?</h2>
-      <p class="defense-cta__sub">We talk to security teams, auditors, and funds. Or just say hello.</p>
+    <div class="container vanguard-cta">
+      <h2>Interested in Vanguard?</h2>
+      <p class="vanguard-cta__sub">We talk to security teams, auditors, and funds. Or just say hello.</p>
       <a class="contact__email" href={`mailto:${site.email}`}>{site.email}</a>
-      <p class="defense-cta__notes mono"><a href="/notes">or read the research notes →</a></p>
+      <p class="vanguard-cta__notes mono"><a href="/notes">or read the research notes →</a></p>
     </div>
   </section>
 </Base>

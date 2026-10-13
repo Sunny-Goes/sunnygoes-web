@@ -10,16 +10,16 @@ template content is marked with the string `TEMPLATE` or `placeholder: true`.
 
 ## 2. Site-wide data — `src/data/site.json`
 
-- `email` — contact email (used in section 04 + the `/defense` CTA)
+- `email` — contact email (used in section 04 + the `/vanguard` CTA)
 - `github` — GitHub org URL (nav, footer, contact)
 - `x` — X/Twitter profile URL (contact)
 - `rss` — feed path (only change if you move it)
 - `copyright` — legal/footer line
 
-## 3. Product story — `src/data/defense.json`
+## 3. Product story — `src/data/vanguard.json`
 
-All Defense copy lives here: name, tagline, pitch, the six pipeline stage blurbs
-(shown on hover/focus in the diagram), and the five deck slides on `/defense`.
+All Vanguard copy lives here: name, tagline, pitch, the six pipeline stage blurbs
+(shown on hover/focus in the diagram), and the five deck slides on `/vanguard`.
 Written to be shown to investors; edit freely. Two rules: the product's internal
 codename never appears on the site, and no internal architecture terms belong in
 this file.
@@ -47,7 +47,7 @@ way — one Markdown file per note, frontmatter validated in `src/content.config
 
 Generated from the asset pack (sticker + wordmark + Menlo type on cream, 1200×630).
 Regenerate or replace if the brand changes; referenced in `src/layouts/Base.astro`.
-Note: the current OG image predates the Defense restructure.
+Note: the current OG image predates the Vanguard restructure.
 
 ## Watermark status (resolved on the shipped assets)
 

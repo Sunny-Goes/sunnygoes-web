@@ -1,7 +1,7 @@
 {
-  "name": "Defense",
+  "name": "Vanguard",
   "tagline": "An autonomous whitehat system for vulnerability discovery.",
-  "pitch": "Defense explores a codebase the way an attacker would, then proves every finding the way an auditor must. Intelligence for exploration, determinism for proof, and a memory that compounds: every bug hour makes the next hunt faster.",
+  "pitch": "Vanguard explores a codebase the way an attacker would, then proves every finding the way an auditor must. Intelligence for exploration, determinism for proof, and a memory that compounds: every bug hour makes the next hunt faster.",
   "stages": [
     { "id": "input",       "label": "codebase + scope",  "blurb": "The target: source code, pinned and scoped." },
     { "id": "explore",     "label": "explore",           "blurb": "Agents map the attack surface and hunt for weak points." },
@@ -12,7 +12,7 @@
   ],
   "slides": [
     { "num": "01", "title": "The problem",  "body": "Billions sit in contracts audited once, by hand, under time pressure, while the code keeps shipping. Attackers need one bug. Defenders need all of them." },
-    { "num": "02", "title": "Meet Defense", "body": "An autonomous whitehat system for vulnerability discovery. Defense explores a codebase the way an attacker would, and proves every finding the way an auditor must." },
+    { "num": "02", "title": "Meet Vanguard", "body": "An autonomous whitehat system for vulnerability discovery. Vanguard explores a codebase the way an attacker would, and proves every finding the way an auditor must." },
     { "num": "03", "title": "Intelligence for exploration", "body": "Agents map the attack surface, reason about incentives, and rank hypotheses by reachability and impact. Exploration is creative, and it never sleeps." },
     { "num": "04", "title": "Determinism for proof", "body": "Every candidate vulnerability must reproduce as a runnable proof-of-concept. No proof, no report. Findings you can verify, not speculation you must trust." },
     { "num": "05", "title": "Memory that compounds", "body": "Findings, dead ends, and fixes feed an updating memory: every bug hour makes the next hunt faster. An advantage that compounds, hunt after hunt." }
