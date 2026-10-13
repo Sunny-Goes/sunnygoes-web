@@ -12,7 +12,7 @@ const external = Boolean(url);
 const iso = date.toISOString().slice(0, 10);
 ---
 
-<div class="note-row" data-note-chapter={note.data.chapter ?? ''}>
+<div class="note-row">
   <time class="note-row__date" datetime={iso}>{iso}</time>
   <div>
     <a href={href} {...external ? { target: '_blank', rel: 'noopener' } : {}}>

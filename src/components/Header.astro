@@ -4,16 +4,16 @@ import { img } from '../lib/images';
 
 const current = Astro.url.pathname;
 const links = [
-  { href: '/#chapters', label: 'Chapters' },
+  { href: '/vanguard', label: 'Vanguard' },
   { href: '/notes', label: 'Notes' },
-  { href: '/#projects', label: 'Projects' },
   { href: '/#studio', label: 'Studio' },
 ];
+const isCurrent = (href: string) => !href.includes('#') && current.startsWith(href);
 ---
 
 <header class="site-header">
   <div class="container site-header__inner">
-    <a class="site-header__logo" href="/" aria-label="Sunny Goes — home">
+    <a class="site-header__logo" href="/" aria-label="Sunny Goes home">
       <Image src={img('brand/sunny-wordmark.png')} alt="SUNNY" width={150} loading="eager" />
       <span class="mono">goes</span>
     </a>
@@ -22,7 +22,7 @@ const links = [
     </button>
     <nav class="site-nav" id="site-nav" aria-label="Main">
       {links.map((l) => (
-        <a href={l.href} aria-current={l.href === '/notes' && current.startsWith('/notes') ? 'page' : undefined}>
+        <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>
           {l.label}
         </a>
       ))}

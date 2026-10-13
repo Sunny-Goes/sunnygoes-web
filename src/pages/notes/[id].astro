@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 
 const { note } = Astro.props;
 const { Content } = await render(note);
-const { title, date, abstract, tags, chapter, cover, paper } = note.data;
+const { title, date, abstract, tags, cover, paper } = note.data;
 const iso = date.toISOString().slice(0, 10);
 ---
 
@@ -21,8 +21,6 @@ const iso = date.toISOString().slice(0, 10);
       <a class="back-link--top" href="/notes">← all notes</a>
       <div class="note-page__meta mono">
         <time datetime={iso}>{iso}</time>
-        {chapter && <span>·</span>}
-        {chapter && <span>sunny goes {chapter}</span>}
         {tags.map((t) => <span class="note-row__tag">{t}</span>)}
       </div>
       <h1>{title}</h1>

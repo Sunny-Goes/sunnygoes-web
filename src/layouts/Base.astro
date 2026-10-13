@@ -15,7 +15,7 @@ interface Props {
 }
 
 const {
-  title = `${site.name} — independent research studio`,
+  title = `${site.name} · autonomous vulnerability research`,
   description = site.tagline,
   ogImage = '/og-image.png',
 } = Astro.props;
@@ -46,7 +46,7 @@ const ogUrl = new URL(ogImage, Astro.site);
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="alternate" type="application/rss+xml" title={`${site.name} — notes`} href={site.rss} />
+    <link rel="alternate" type="application/rss+xml" title={`${site.name} · notes`} href={site.rss} />
     <meta name="generator" content={Astro.generator} />
     <script is:inline>
       document.documentElement.classList.replace('no-js', 'js');
@@ -95,32 +95,85 @@ const ogUrl = new URL(ogImage, Astro.site);
         revealEls.forEach((el) => el.classList.add('in'));
       }
 
-      // --- notes chapter filter (index page) ---
-      const filterBar = document.querySelector<HTMLElement>('[data-filter-bar]');
-      if (filterBar) {
-        const buttons = Array.from(filterBar.querySelectorAll('button[data-chapter]'));
-        const rows = Array.from(document.querySelectorAll<HTMLElement>('[data-note-chapter]'));
-        const empty = document.querySelector<HTMLElement>('[data-empty-state]');
-
-        const apply = (chapter: string, updateUrl = true) => {
-          buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.chapter === chapter)));
-          let visible = 0;
-          rows.forEach((row) => {
-            const showRow = chapter === 'all' || row.dataset.noteChapter === chapter;
-            row.style.display = showRow ? '' : 'none';
-            if (showRow) visible++;
-          });
-          empty?.classList.toggle('visible', visible === 0);
-          if (updateUrl) {
-            const url = new URL(window.location.href);
-            chapter === 'all' ? url.searchParams.delete('chapter') : url.searchParams.set('chapter', chapter);
-            window.history.replaceState(null, '', url);
+      // --- vanguard pipeline: hover/focus a stage to read what it does ---
+      const pipeline = document.querySelector<HTMLElement>('[data-pipeline]');
+      if (pipeline) {
+        const panel = pipeline.querySelector<HTMLElement>('[data-pipeline-panel]');
+        const stages = Array.from(pipeline.querySelectorAll<HTMLElement>('[data-stage]'));
+        const fallback = panel?.textContent ?? '';
+        let activeStage: string | null = null;
+        const activate = (id: string | null) => {
+          if (id === activeStage) return;
+          activeStage = id;
+          pipeline.querySelectorAll('.is-active').forEach((el) => el.classList.remove('is-active'));
+          if (id && panel) {
+            pipeline
+              .querySelectorAll(`[data-stage="${id}"], [data-stages~="${id}"]`)
+              .forEach((el) => el.classList.add('is-active'));
+            const blurb = stages.find((s) => s.dataset.stage === id)?.dataset.blurb;
+            if (blurb) panel.textContent = blurb;
+          } else if (panel) {
+            panel.textContent = fallback;
           }
         };
+        stages.forEach((s) => {
+          s.addEventListener('mouseenter', () => activate(s.dataset.stage ?? null));
+          s.addEventListener('focus', () => activate(s.dataset.stage ?? null));
+          s.addEventListener('mouseleave', () => activate(null));
+          s.addEventListener('blur', () => activate(null));
+        });
+      }
 
-        buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.chapter!)));
-        const initial = new URLSearchParams(window.location.search).get('chapter');
-        if (initial && buttons.some((b) => b.dataset.chapter === initial)) apply(initial, false);
+      // --- vanguard deck: prev/next buttons, dots, counter ---
+      const deck = document.querySelector<HTMLElement>('[data-deck]');
+      if (deck) {
+        const track = deck.querySelector<HTMLElement>('.deck__track')!;
+        const slides = Array.from(track.querySelectorAll<HTMLElement>('.deck__slide'));
+        const dots = Array.from(deck.querySelectorAll<HTMLButtonElement>('[data-deck-dot]'));
+        const count = deck.querySelector<HTMLElement>('[data-deck-count]');
+        const prev = deck.querySelector<HTMLButtonElement>('[data-deck-prev]');
+        const next = deck.querySelector<HTMLButtonElement>('[data-deck-next]');
+        let currentSlide = 0;
+        const go = (i: number) => {
+          const clamped = Math.max(0, Math.min(i, slides.length - 1));
+          track.scrollTo({
+            left: slides[clamped].offsetLeft,
+            behavior: reduced ? 'auto' : 'smooth',
+          });
+        };
+        const sync = () => {
+          const left = track.scrollLeft;
+          let best = 0;
+          let bestDist = Infinity;
+          slides.forEach((s, i) => {
+            const d = Math.abs(s.offsetLeft - left);
+            if (d < bestDist) {
+              bestDist = d;
+              best = i;
+            }
+          });
+          currentSlide = best;
+          dots.forEach((d, i) => d.setAttribute('aria-current', String(i === currentSlide)));
+          if (count) count.textContent = `${currentSlide + 1} / ${slides.length}`;
+        };
+        prev?.addEventListener('click', () => go(currentSlide - 1));
+        next?.addEventListener('click', () => go(currentSlide + 1));
+        dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+        let ticking = false;
+        track.addEventListener(
+          'scroll',
+          () => {
+            if (!ticking) {
+              ticking = true;
+              requestAnimationFrame(() => {
+                sync();
+                ticking = false;
+              });
+            }
+          },
+          { passive: true }
+        );
+        sync();
       }
     </script>
   </body>

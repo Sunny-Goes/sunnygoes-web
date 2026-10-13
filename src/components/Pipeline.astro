@@ -1,0 +1,78 @@
+---
+import vanguard from '../data/vanguard.json';
+
+const stages = Object.fromEntries(vanguard.stages.map((s) => [s.id, s]));
+const blurb = (id: string) => stages[id]?.blurb ?? '';
+---
+
+<div class="pipe" data-pipeline>
+  <div class="pipe__scroll">
+    <svg
+      viewBox="0 0 1000 380"
+      role="group"
+      aria-label="How Vanguard works: a codebase flows through explore, hypothesize and prove, comes out as verified findings, and a memory loop feeds what was learned back into the next hunt."
+    >
+      <defs>
+        <marker id="pipe-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+          <path class="pipe__arrowhead" d="M 0 1.5 L 9 5 L 0 8.5" />
+        </marker>
+      </defs>
+
+      <!-- the system frame -->
+      <rect class="pipe__frame" x="190" y="55" width="560" height="300" rx="18" />
+      <text class="pipe__framelabel" x="214" y="40">vanguard</text>
+
+      <!-- forward wires -->
+      <path class="pipe__wire" data-stages="input" d="M 0 110 H 20" marker-end="url(#pipe-arrow)" />
+      <path class="pipe__wire" data-stages="input explore" d="M 160 110 H 210" marker-end="url(#pipe-arrow)" />
+      <path class="pipe__wire" data-stages="explore hypothesize" d="M 350 110 H 400" marker-end="url(#pipe-arrow)" />
+      <path class="pipe__wire" data-stages="hypothesize prove" d="M 540 110 H 590" marker-end="url(#pipe-arrow)" />
+      <path class="pipe__wire" data-stages="prove output" d="M 730 110 H 800" marker-end="url(#pipe-arrow)" />
+      <path class="pipe__wire" data-stages="output" d="M 940 110 H 1000" marker-end="url(#pipe-arrow)" />
+
+      <!-- memory loop -->
+      <path class="pipe__wire pipe__wire--loop" data-stages="prove memory" d="M 660 142 V 200 H 610 V 270" marker-end="url(#pipe-arrow)" />
+      <path class="pipe__wire pipe__wire--loop" data-stages="explore memory" d="M 430 270 V 200 H 280 V 142" marker-end="url(#pipe-arrow)" />
+      <text class="pipe__flowlabel" x="635" y="192">learns</text>
+      <text class="pipe__flowlabel" x="355" y="192">informs</text>
+
+      <!-- packets (animated in CSS via offset-path) -->
+      <circle class="pipe__packet pipe__packet--entry" r="4.5" />
+      <circle class="pipe__packet pipe__packet--c1" r="4.5" />
+      <circle class="pipe__packet pipe__packet--c2" r="4.5" />
+      <circle class="pipe__packet pipe__packet--c3" r="4.5" />
+      <circle class="pipe__packet pipe__packet--c4" r="4.5" />
+      <circle class="pipe__packet pipe__packet--exit" r="4.5" />
+      <circle class="pipe__packet pipe__packet--learn" r="4" />
+      <circle class="pipe__packet pipe__packet--inform" r="4" />
+      <circle class="pipe__packet pipe__packet--inform2" r="4" />
+
+      <!-- stages -->
+      <g class="pipe__stage" data-stage="input" data-blurb={blurb('input')} tabindex="0" aria-label={`codebase + scope. ${blurb('input')}`}>
+        <rect x="20" y="78" width="140" height="64" rx="14" />
+        <text x="90" y="103" text-anchor="middle"><tspan x="90" dy="0">codebase</tspan><tspan x="90" dy="17">+ scope</tspan></text>
+      </g>
+      <g class="pipe__stage" data-stage="explore" data-blurb={blurb('explore')} tabindex="0" aria-label={`explore. ${blurb('explore')}`}>
+        <rect x="210" y="78" width="140" height="64" rx="14" />
+        <text x="280" y="115" text-anchor="middle">explore</text>
+      </g>
+      <g class="pipe__stage" data-stage="hypothesize" data-blurb={blurb('hypothesize')} tabindex="0" aria-label={`hypothesize. ${blurb('hypothesize')}`}>
+        <rect x="400" y="78" width="140" height="64" rx="14" />
+        <text x="470" y="115" text-anchor="middle">hypothesize</text>
+      </g>
+      <g class="pipe__stage" data-stage="prove" data-blurb={blurb('prove')} tabindex="0" aria-label={`prove. ${blurb('prove')}`}>
+        <rect x="590" y="78" width="140" height="64" rx="14" />
+        <text x="660" y="115" text-anchor="middle">prove</text>
+      </g>
+      <g class="pipe__stage" data-stage="output" data-blurb={blurb('output')} tabindex="0" aria-label={`verified findings. ${blurb('output')}`}>
+        <rect x="800" y="78" width="140" height="64" rx="14" />
+        <text x="870" y="103" text-anchor="middle"><tspan x="870" dy="0">verified</tspan><tspan x="870" dy="17">findings</tspan></text>
+      </g>
+      <g class="pipe__stage" data-stage="memory" data-blurb={blurb('memory')} tabindex="0" aria-label={`memory. ${blurb('memory')}`}>
+        <rect x="350" y="270" width="350" height="56" rx="14" />
+        <text x="525" y="303" text-anchor="middle">memory</text>
+      </g>
+    </svg>
+  </div>
+  <p class="pipe__panel mono" data-pipeline-panel>{vanguard.pitch}</p>
+</div>
