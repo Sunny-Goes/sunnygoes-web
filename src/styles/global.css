@@ -245,9 +245,9 @@ ul, ol { padding: 0; list-style: none; }
   .manifesto__sunny { width: 84px; }
 }
 
-/* ---------- vanguard (home section + /vanguard page) ---------- */
-.vanguard-more { margin-top: 28px; }
-.vanguard-more a {
+/* ---------- illumina (home section + /illumina page) ---------- */
+.illumina-more { margin-top: 28px; }
+.illumina-more a {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   letter-spacing: 0.1em;
@@ -255,34 +255,34 @@ ul, ol { padding: 0; list-style: none; }
   border-bottom: 2px solid var(--accent);
   padding-bottom: 2px;
 }
-.vanguard-hero { padding-block: 72px 64px; }
-.vanguard-hero__kicker { color: var(--ink-50); margin-bottom: 18px; }
-.vanguard-hero h1 {
+.illumina-hero { padding-block: 72px 64px; }
+.illumina-hero__kicker { color: var(--ink-50); margin-bottom: 18px; }
+.illumina-hero h1 {
   font-size: clamp(3rem, 7vw, 5rem);
   font-weight: 500;
   letter-spacing: -0.03em;
   line-height: 1;
 }
-.vanguard-hero__tagline {
+.illumina-hero__tagline {
   margin-top: 20px;
   font-size: clamp(1.2rem, 2.4vw, 1.6rem);
   font-weight: 500;
   max-width: 34ch;
 }
-.vanguard-hero__pitch { margin-top: 18px; color: var(--ink-70); max-width: 60ch; }
-.vanguard-cta h2 { font-size: clamp(1.7rem, 3.6vw, 2.4rem); font-weight: 500; letter-spacing: -0.02em; }
-.vanguard-cta__sub { margin-top: 12px; color: var(--ink-70); }
-.vanguard-cta .contact__email { display: inline-block; margin-top: 28px; }
-.vanguard-cta__notes { margin-top: 26px; }
-.vanguard-cta__notes a {
+.illumina-hero__pitch { margin-top: 18px; color: var(--ink-70); max-width: 60ch; }
+.illumina-cta h2 { font-size: clamp(1.7rem, 3.6vw, 2.4rem); font-weight: 500; letter-spacing: -0.02em; }
+.illumina-cta__sub { margin-top: 12px; color: var(--ink-70); }
+.illumina-cta .contact__email { display: inline-block; margin-top: 28px; }
+.illumina-cta__notes { margin-top: 26px; }
+.illumina-cta__notes a {
   color: var(--ink-50);
   border-bottom: 2px solid var(--line);
   padding-bottom: 2px;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
-.vanguard-cta__notes a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+.illumina-cta__notes a:hover { color: var(--ink); border-bottom-color: var(--accent); }
 
-/* ---------- vanguard pipeline (interactive diagram) ---------- */
+/* ---------- illumina pipeline (interactive diagram) ---------- */
 .pipe__scroll { overflow-x: auto; }
 .pipe__scroll svg { display: block; width: 100%; min-width: 640px; height: auto; }
 .pipe__frame { fill: none; stroke: var(--line); stroke-width: 1; }
@@ -366,7 +366,7 @@ ul, ol { padding: 0; list-style: none; }
   padding-left: 14px;
 }
 
-/* ---------- vanguard deck (swiping slides) ---------- */
+/* ---------- illumina deck (swiping slides) ---------- */
 .deck__track {
   position: relative;
   display: flex;

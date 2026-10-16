@@ -7,22 +7,22 @@ import Pipeline from '../components/Pipeline.astro';
 import NoteRow from '../components/NoteRow.astro';
 import { img } from '../lib/images';
 import site from '../data/site.json';
-import vanguard from '../data/vanguard.json';
+import illumina from '../data/illumina.json';
 
 const notes = (await getCollection('notes', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 7);
 ---
 
-<Base description="Sunny Goes builds Vanguard, an autonomous whitehat system for vulnerability discovery, and publishes research notes on AI and security.">
+<Base description="Sunny Goes builds Illumina, an autonomous whitehat system for vulnerability discovery, and publishes research notes on AI and security.">
   <!-- 1 · HERO -->
   <section class="hero">
     <div class="container hero__grid">
       <div>
-        <h1><span class="u-accent">Vanguard</span>: autonomous vulnerability discovery, proven.</h1>
+        <h1><span class="u-accent">Illumina</span>: autonomous vulnerability discovery, proven.</h1>
         <p class="hero__sub">{site.tagline}</p>
         <p class="hero__cta">
-          <a class="hero__cta-link hero__cta-link--primary" href="/vanguard">How it works →</a>
+          <a class="hero__cta-link hero__cta-link--primary" href="/illumina">How it works →</a>
           <a class="hero__cta-link" href="/notes">Latest notes →</a>
         </p>
       </div>
@@ -55,19 +55,19 @@ const notes = (await getCollection('notes', ({ data }) => !data.draft))
     </div>
   </section>
 
-  <!-- 3 · VANGUARD -->
-  <section class="section" id="vanguard">
+  <!-- 3 · ILLUMINA -->
+  <section class="section" id="illumina">
     <div class="container">
       <SectionHead
         num="01"
-        title="Vanguard"
-        desc={vanguard.tagline}
+        title="Illumina"
+        desc={illumina.tagline}
         sunny="poses/sunny-building.png"
         sunnyAlt="Sunny repairing a gadget with a wrench"
       />
       <Pipeline />
-      <div class="vanguard-more">
-        <a href="/vanguard">The full story →</a>
+      <div class="illumina-more">
+        <a href="/illumina">The full story →</a>
       </div>
     </div>
   </section>
@@ -105,7 +105,7 @@ const notes = (await getCollection('notes', ({ data }) => !data.draft))
             cryptoeconomics.
           </p>
           <p>
-            We research in public through our notes, and we build Vanguard, our autonomous
+            We research in public through our notes, and we build Illumina, our autonomous
             whitehat system for vulnerability discovery. Sunny, the little robot, is how
             the lab notebook talks back.
           </p>

@@ -2,18 +2,18 @@
 import Base from '../layouts/Base.astro';
 import SectionHead from '../components/SectionHead.astro';
 import Pipeline from '../components/Pipeline.astro';
-import vanguard from '../data/vanguard.json';
+import illumina from '../data/illumina.json';
 import site from '../data/site.json';
 ---
 
-<Base title={`${vanguard.name} · Sunny Goes`} description={vanguard.tagline}>
+<Base title={`${illumina.name} · Sunny Goes`} description={illumina.tagline}>
   <!-- page head -->
-  <section class="vanguard-hero">
+  <section class="illumina-hero">
     <div class="container">
-      <p class="vanguard-hero__kicker mono">the product</p>
-      <h1>{vanguard.name}</h1>
-      <p class="vanguard-hero__tagline">{vanguard.tagline}</p>
-      <p class="vanguard-hero__pitch">{vanguard.pitch}</p>
+      <p class="illumina-hero__kicker mono">the product</p>
+      <h1>{illumina.name}</h1>
+      <p class="illumina-hero__tagline">{illumina.tagline}</p>
+      <p class="illumina-hero__pitch">{illumina.pitch}</p>
     </div>
   </section>
 
@@ -38,8 +38,8 @@ import site from '../data/site.json';
         desc="Five slides. Swipe, or use the arrows."
       />
       <div class="deck" data-deck>
-        <div class="deck__track" tabindex="0" role="region" aria-label="Vanguard story slides">
-          {vanguard.slides.map((s) => (
+        <div class="deck__track" tabindex="0" role="region" aria-label="Illumina story slides">
+          {illumina.slides.map((s) => (
             <article class="deck__slide">
               <span class="deck__num mono">{s.num}</span>
               <h3>{s.title}</h3>
@@ -50,11 +50,11 @@ import site from '../data/site.json';
         <div class="deck__nav">
           <button class="deck__btn mono" data-deck-prev aria-label="Previous slide">←</button>
           <div class="deck__dots">
-            {vanguard.slides.map((_, i) => (
+            {illumina.slides.map((_, i) => (
               <button class="deck__dot" data-deck-dot={i} aria-label={`Go to slide ${i + 1}`} />
             ))}
           </div>
-          <span class="deck__count mono" data-deck-count>1 / {vanguard.slides.length}</span>
+          <span class="deck__count mono" data-deck-count>1 / {illumina.slides.length}</span>
           <button class="deck__btn mono" data-deck-next aria-label="Next slide">→</button>
         </div>
       </div>
@@ -63,11 +63,11 @@ import site from '../data/site.json';
 
   <!-- cta -->
   <section class="section section--alt">
-    <div class="container vanguard-cta">
-      <h2>Interested in Vanguard?</h2>
-      <p class="vanguard-cta__sub">We talk to security teams, auditors, and funds. Or just say hello.</p>
+    <div class="container illumina-cta">
+      <h2>Interested in Illumina?</h2>
+      <p class="illumina-cta__sub">We talk to security teams, auditors, and funds. Or just say hello.</p>
       <a class="contact__email" href={`mailto:${site.email}`}>{site.email}</a>
-      <p class="vanguard-cta__notes mono"><a href="/notes">or read the research notes →</a></p>
+      <p class="illumina-cta__notes mono"><a href="/notes">or read the research notes →</a></p>
     </div>
   </section>
 </Base>

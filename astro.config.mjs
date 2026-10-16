@@ -2,9 +2,12 @@ import { defineConfig } from 'astro/config';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
-// PLACEHOLDER: replace `site` with the real domain (see PLACEHOLDERS.md)
+// Production domain: canonical URLs, OG tags and RSS derive from this
 export default defineConfig({
-  site: 'https://sunnygoes.com',
+  site: 'https://www.sunnygoes.xyz',
+  redirects: {
+    '/vanguard': '/illumina',
+  },
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
